@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+	Все айтемы(Items)
+{% endblock %}
+
+{% block js-libs %}
+	<script src="{% static 'item/forOrder.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="items-wrapper">
+		{% for item in items %}
+			<div class="item-wrapper" data-item-id="{{ item.id }}" data-currency="{{ item.currency }}">
+				<h1>{{ item.name }}</h1>
+				<p>Description: {{ item.description }}</p>
+				<p>Price:
+					<span class="price">
+						{{ item.price|floatformat:2 }}
+					</span>
+					{% if item.discount %}
+						<span class="discount">
+							({{ item.discount.percent }}% - discount)
+						</span>
+					{% endif %}
+					{{ item.currency }}
+				</p>
+				<a class="link forward" href="{% url 'view-item' item.id %}">Перейти ></a>
+				<input type="checkbox">
+				<div class="marker-wrapper">
+					<img src="{% static 'item/images/chosen_marker.png' %}" alt="" width="24" height="24">
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<button id="createOrder" data-create-order-url="{% url 'create-order' %}">
+		Создать ордер(Order)
+	</button>
+{% endblock %}

@@ -14,8 +14,7 @@ a {
 	color: inherit;
 }
 
-html {
-	min-height: 100vh;
+html, body {
 	height: 100%;
 }
 
@@ -24,7 +23,6 @@ body {
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	height: 100%;
 }
 
 button {

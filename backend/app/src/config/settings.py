@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'item',
+	'order',
 ]
 
 REST_FRAMEWORK = {
@@ -137,8 +138,15 @@ STATICFILES_DIRS = [CONFIG_DIR / 'static']
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_KEYS = {
+	"usd": {
+		"sk": os.getenv('STRIPE_USD_SECRET_KEY'),
+		"pk": os.getenv('STRIPE_USD_PUBLIC_KEY'),
+	},
+	"eur": {
+		"sk": os.getenv('STRIPE_EUR_SECRET_KEY'),
+		"pk": os.getenv('STRIPE_EUR_PUBLIC_KEY'),
+	},
+}
 
 APP_URL = os.getenv('APP_URL')

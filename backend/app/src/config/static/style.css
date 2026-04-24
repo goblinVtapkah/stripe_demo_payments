@@ -1,11 +1,11 @@
 main {
 	width: 100%;
-	height: 100%;
+	min-height: 100vh;
 	display: flex;
-	align-items: center;
 	justify-content: center;
 	background: linear-gradient(270deg, #1e90ff, #ffd700);
 	background-size: 400% 400%;
+	padding: 50px;
 	animation: gradientMove 10s ease infinite;
 }
 
@@ -21,7 +21,21 @@ main {
 	}
 }
 
-.item-wrapper {
+.items-wrapper, .orders-wrapper {
+  	margin: auto;
+	align-self: flex-start;
+	display: grid;
+	gap: 16px;
+	max-width: 80%;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.orders-wrapper {
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.item-wrapper, .order-wrapper {
+  	margin: auto;
 	background: #e8e8e8;
 	display: flex;
 	flex-direction: column;
@@ -30,6 +44,45 @@ main {
 	padding: 20px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	transition: transform .2s ease, box-shadow .2s ease;
+	min-width: 300px;
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+.order-wrapper {
+	min-width: 120px;
+}
+
+.item-wrapper .marker-wrapper {
+	width: 26px;
+	height: 26px;
+	border: 1px solid #888888;
+	border-radius: 5px;
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	transition: background-color .2s ease;
+}
+
+.item-wrapper input {
+	display: none;
+}
+
+.item-wrapper .marker-wrapper:hover {
+	background-color: #3825cb3c
+}
+
+.item-wrapper .marker-wrapper img {
+	display: none;
+}
+
+.item-wrapper input:checked + .marker-wrapper img {
+	display: block;
+}
+
+.marker-wrapper.disabled {
+	display: none;
 }
 
 .item-wrapper:hover {
@@ -38,7 +91,7 @@ main {
 	background-position: 100% 50%;
 }
 
-h1, p {
+h1, p, a.link {
 	color: #2c2c2c;
 }
 
@@ -46,17 +99,87 @@ span.price {
 	color: #2ecc71;
 }
 
-button {
+span.discount {
+	color: #b90000;
+}
+
+a.link {
+	align-self: flex-start;
+	cursor: pointer;
+	transition: transform .2s ease, color .2s ease;
+}
+
+a.link.forward {
+	align-self: flex-end;
+}
+
+a.link:hover {
+	color: #460505;
+	transform: scale(1.1);
+}
+
+a.link.back:hover {
+	transform: translateX(-10px);
+}
+
+a.link.forward:hover {
+	transform: translateX(10px);
+}
+
+button#buyButton {
 	color: #8ad3c4;
 	background: #2e0404;
 	border-radius: 8px;
 	padding: 5px 12px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	transition: transform .2s ease, box-shadow .2s ease;
-	overflow: hidden;
 }
 
-button:hover {
+button#buyButton:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+	background-position: 100% 50%;
+}
+
+button#createOrder {
+	color: #8ad3c4;
+	background: #2e0404;
+	border-radius: 8px;
+	padding: 5px 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	position: fixed;
+	bottom: -200px;
+	transition: transform .2s ease, box-shadow .2s ease, bottom .2s ease;
+}
+
+button#createOrder.active {
+	bottom: 100px;
+}
+
+button#createOrder:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+	background-position: 100% 50%;
+}
+
+
+.buttons {
+	display: flex;
+	column-gap: 8px;
+	position: fixed;
+	bottom: 100px;
+}
+
+.buttons a, .buttons button {
+	color: #8ad3c4;
+	background: #2e0404;
+	border-radius: 8px;
+	padding: 5px 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.buttons a:hover, .buttons button:hover {
 	transform: translateY(-2px);
 	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 	background-position: 100% 50%;

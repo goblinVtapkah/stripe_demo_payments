@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+	Все ордера(Order)
+{% endblock %}
+
+{% block content %}
+	<div class="orders-wrapper">
+		{% for order in orders %}
+			<div class="order-wrapper">
+				<h1>{{ order.id }}</h1>
+				<a class="link forward" href="{% url 'view-order' order.id %}">Перейти ></a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

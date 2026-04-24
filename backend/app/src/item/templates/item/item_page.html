@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+	Айтем(Item) - {{ item.name }}
+{% endblock %}
+
+{% block js-libs %}
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="{% static 'item/buyScript.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="item-wrapper">
+		<a class="link back" href="{% url 'view-items' %}">< Назад</a>
+		<h1>{{ item.name }}</h1>
+		<p>Description: {{ item.description }}</p>
+		<p>Price:
+			<span class="price">
+				{{ item.price|floatformat:2 }}
+			</span>
+			{% if item.discount %}
+				<span class="discount">
+					({{ item.discount.percent }}% - discount)
+				</span>
+			{% endif %}
+			{{ item.currency }}
+		</p>
+		<button
+			id="buyButton"
+			data-buy-url="{% url 'buy-item' item.id %}"
+			data-stripe-public-key="{{ stripe_public_key }}"
+		>Buy</button>
+	</div>
+{% endblock %}

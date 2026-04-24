@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+	Order {{ id }}
+{% endblock %}
+
+{% block js-libs %}
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="{% static 'order/buyScript.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="items-wrapper">
+		{% for item in items %}
+			<div class="item-wrapper"">
+				<h1>{{ item.item.name }}</h1>
+				<p>Description: {{ item.item.description }}</p>
+				<p>Price:
+					<span class="price">
+						{{ item.item.price|floatformat:2 }}
+					</span>
+					{% if item.item.discount %}
+						<span class="discount">
+							({{ item.item.discount.percent }}% - discount)
+						</span>
+					{% endif %}
+					{{ item.item.currency }}
+				</p>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="buttons">
+		<a href="{% url 'view-orders' %}"> Назад </a>
+		{% if items %}
+			<button
+				id="buyOrderButton"
+				data-buy-url="{% url 'buy-order' id %}"
+				data-stripe-public-key="{{ stripe_public_key }}"
+			>
+				Купить
+			</button>
+		{% endif %}
+	</div>
+{% endblock %}
