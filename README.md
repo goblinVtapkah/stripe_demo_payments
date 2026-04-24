@@ -21,5 +21,11 @@ sh ./scripts/django_createsuperuser.sh
 
 ## 🌐 Network
 
+- `GET /admin` *Админка*
+- `GET /item/` *get all items page*
 - `GET /item/:id` *get item's page*
-- `GET /buy/:id` *get stripe session id*
+- `GET /buy/:id` *get stripe session id for *
+- `GET /order/` *get all orders page*
+- `POST /order/create/` *create order*
+- `GET /order/:id` *get order's page*
+- `GET /order/buy/:id` *get stripe session id*
