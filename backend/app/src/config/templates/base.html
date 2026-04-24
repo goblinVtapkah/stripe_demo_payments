@@ -1,0 +1,18 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" href="{% static 'reset.css' %}">
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+	{% block style %}{% endblock %}
+	{% block js-libs %}{% endblock %}
+</head>
+<body>
+	<main>
+		{% block content %}
+		{% endblock %}
+	</main>
+</body>
+</html>

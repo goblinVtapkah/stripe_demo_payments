@@ -1,0 +1,83 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pkl
+
+# виртуальное окружение
+venv/
+env/
+ENV/
+.venv/
+
+# =====================
+# Django
+# =====================
+*.log
+db.sqlite3
+media/
+
+# миграции (обычно не игнорируют, но можно если нужно)
+# **/migrations/*
+# !**/migrations/__init__.py
+
+# =====================
+# Environment variables
+# =====================
+.env
+.env.*
+!.env.example
+
+# =====================
+# IDE / editors
+# =====================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =====================
+# OS files
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Docker
+# =====================
+docker-compose.override.yml
+
+# =====================
+# Static files (если собираются локально)
+# =====================
+staticfiles/
+
+# =====================
+# pytest / coverage
+# =====================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =====================
+# mypy / type checking
+# =====================
+.mypy_cache/
+.dmypy.json
+
+# =====================
+# Celery (если используется)
+# =====================
+celerybeat-schedule
+
+# =====================
+# Node (если фронт есть)
+# =====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
