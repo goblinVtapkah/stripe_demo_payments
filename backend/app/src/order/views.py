@@ -51,13 +51,16 @@ class BuyOrderView(APIView):
 		line_items = []
 
 		for item in items:
+			discounted_price = item.item.price
+			if hasattr(item.item, 'discount'):
+				discounted_price = item.item.price - item.item.discount.percent / 100 * item.item.price
 			line_items.append({
 				'price_data': {
 					'currency': item.item.currency,
 					'product_data': {
 						'name': item.item.name,
 					},
-					'unit_amount': int(item.item.price * 100),
+					'unit_amount': int(discounted_price * 100),
 				},
 				'quantity': 1,
 			})

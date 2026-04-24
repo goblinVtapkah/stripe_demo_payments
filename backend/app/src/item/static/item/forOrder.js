@@ -36,17 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
 				input.checked = false
 				return
 			}
-			selectedArray.push(itemId)
-			if (selectedArray.length === 1) {
-				currentCurrency = currency
-				items.forEach((item) => {
-					const currency = item.getAttribute('data-currency')
-					const markerWrapper = item.querySelector('.marker-wrapper')
-					if (currentCurrency !== currency) markerWrapper.classList.add('disabled')
-				})
+			if (currentCurrency === '' || currentCurrency === currency) {
+				selectedArray.push(itemId)
+				if (selectedArray.length === 1) {
+					currentCurrency = currency
+					items.forEach((item) => {
+						const currency = item.getAttribute('data-currency')
+						const markerWrapper = item.querySelector('.marker-wrapper')
+						if (currentCurrency !== currency) markerWrapper.classList.add('disabled')
+					})
+				}
+				createOrder.classList.add('active')
+				input.checked = true
 			}
-			createOrder.classList.add('active')
-			input.checked = true
 		})
 	})
 

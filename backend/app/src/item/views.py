@@ -48,6 +48,16 @@ class BuyItemView(APIView):
 		currency = item.currency.lower()
 
 		stripe.api_key = STRIPE_KEYS[item.currency.lower()]['sk']
+
+		discounts = []
+		if hasattr(item, 'discount'):
+			coupon = stripe.Coupon.create(
+				percent_off=item.discount.percent,
+				duration="once",
+			)
+			discounts.append({
+				"coupon": coupon.id
+			})
 		session = stripe.checkout.Session.create(
 			mode='payment',
 			line_items=[
@@ -62,6 +72,7 @@ class BuyItemView(APIView):
 					'quantity': 1,
 				}
 			],
+			discounts=discounts,
 			success_url=view_item_url,
 			cancel_url=view_item_url,
 		)
